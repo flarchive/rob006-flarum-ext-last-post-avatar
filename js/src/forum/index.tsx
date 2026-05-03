@@ -1,0 +1,89 @@
+/*
+ * This file is part of rob006/flarum-ext-last-post-avatar.
+ *
+ * Copyright (c) 2023 Robert Korulczyk <robert@korulczyk.pl>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+import app from 'flarum/forum/app';
+import {extend, override} from 'flarum/common/extend';
+import TerminalPost from 'flarum/forum/components/TerminalPost';
+import avatar from 'flarum/common/helpers/avatar';
+import humanTime from 'flarum/common/helpers/humanTime';
+import icon from 'flarum/common/helpers/icon';
+import DiscussionListItem from 'flarum/forum/components/DiscussionListItem';
+import Link from 'flarum/common/components/Link';
+import Tooltip from 'flarum/common/components/Tooltip';
+
+class MyTerminalPost extends TerminalPost {
+
+	view() {
+		const mode = app.forum.attribute('lastPostAvatarMode');
+		const discussion = this.attrs.discussion;
+		const lastPost = this.attrs.lastPost && discussion.replyCount();
+
+		const user = discussion[lastPost ? 'lastPostedUser' : 'user']();
+		const time = discussion[lastPost ? 'lastPostedAt' : 'createdAt']();
+		var showAvatar = (mode === 'all-replies' && lastPost)
+			|| (mode === 'always')
+			|| (mode === 'non-op-replies' && lastPost && discussion.lastPostedUser() != discussion.user())
+		showAvatar &&= !app.forum.attribute('lastPostAvatarIgnorePrivateDiscussions') || !discussion.isPrivateDiscussion?.();
+
+		return (
+			<span>
+				{lastPost ? icon('fas fa-reply') : ''}{' '}
+				{showAvatar ? avatar(user, {className: 'ComposerBody-lastPostAvatar' + (lastPost ? ' reply-avatar' : '')}) : ''}
+				{app.translator.trans('core.forum.discussion_list.' + (lastPost ? 'replied' : 'started') + '_text', {
+					user,
+					ago: humanTime(time),
+				})}
+			</span>
+		);
+	}
+}
+
+app.initializers.add('rob006/flarum-ext-last-post-avatar', () => {
+
+	extend(DiscussionListItem.prototype, 'infoItems', function (items) {
+		if (app.forum.attribute('lastPostAvatarMode') === 'replace-main') {
+			return;
+		}
+		items.replace(
+			'terminalPost',
+			MyTerminalPost.component({
+				discussion: this.attrs.discussion,
+				lastPost: !this.showFirstPost(),
+			})
+		);
+	});
+
+	override(DiscussionListItem.prototype, 'authorAvatarView', function (original) {
+		const discussion = this.attrs.discussion;
+		const lastPost = !this.showFirstPost() && discussion.replyCount();
+
+		if (
+			app.forum.attribute('lastPostAvatarMode') !== 'replace-main'
+			|| (app.forum.attribute('lastPostAvatarIgnorePrivateDiscussions') && discussion.isPrivateDiscussion?.())
+			|| !lastPost
+		) {
+			return original();
+		}
+
+		const user = discussion.lastPostedUser();
+		return (
+			<Tooltip
+				text={app.translator.trans('core.forum.discussion_list.replied_text', {
+					user,
+					ago: humanTime(discussion.lastPostedAt()),
+				})}
+				position="right"
+			>
+				<Link className="DiscussionListItem-author reply-avatar" href={user ? app.route.user(user) : '#'}>
+					{avatar(user || null, {title: ''})}
+				</Link>
+			</Tooltip>
+		);
+	});
+});
