@@ -2,13 +2,22 @@
 
 > **Read-only archive of released versions of rob006/flarum-ext-last-post-avatar.** Not for installation: use [Packagist](https://packagist.org/packages/rob006/flarum-ext-last-post-avatar) or the [upstream repository](https://github.com/rob006-software/flarum-ext-last-post-avatar).
 
-**0** versions archived · Latest: [`2.0.1`](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v2.0.1) · License: `MIT` · Flarum: `^2.0`
+**10** versions archived · Latest: [`2.0.1`](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v2.0.1) · License: `MIT` · Flarum: `^2.0`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| — | — | — | — |
+| `1.0.0` | 2023-02-06 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.0.0) |
+| `1.1.0` | 2023-02-07 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.1.0) |
+| `1.2.0` | 2023-02-11 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.2.0) |
+| `1.2.1` | 2023-02-11 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.2.1) |
+| `1.2.2` | 2023-02-12 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.2.2) |
+| `1.2.3` | 2023-03-14 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.2.3) |
+| `1.2.4` | 2023-04-01 | `^1.6.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.2.4) |
+| `1.3.0` | 2026-05-03 | `^1.8.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v1.3.0) |
+| `2.0.0` | 2026-05-03 | `^2.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v2.0.0) |
+| `2.0.1` | 2026-09-12 | `^2.0` | [Browse](https://github.com/flarchive/rob006-flarum-ext-last-post-avatar/tree/archive/v2.0.1) |
 
 Catalog entry: [packages/rob006-flarum-ext-last-post-avatar.json](https://github.com/flarchive/archive-index/blob/main/packages/rob006-flarum-ext-last-post-avatar.json)
 
